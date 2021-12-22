@@ -1,0 +1,1 @@
+SELECT contact_name, address, phone FROM "PAGILA_INC"."NORTHWINDS_RDS_PUBLIC"."CUSTOMERS"
