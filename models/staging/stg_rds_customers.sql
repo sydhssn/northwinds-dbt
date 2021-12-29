@@ -1,13 +1,18 @@
 --- import ctes
-WITH source as (
-  SELECT * FROM "PAGILA_INC"."NORTHWINDS_RDS_PUBLIC"."CUSTOMERS"
+WITH customers as (
+  SELECT * FROM {{ source('RDS', 'CUSTOMERS') }} 
 ),  
+companies AS (
+  SELECT * FROM dbt_sydhssn.stg_rds_companies
+),
 --- logical ctes
 renamed as (
-    SELECT customer_id, country, 
-    SPLIT_PART(contact_name, ' ', 1) as first_name,
-    SPLIT_PART(contact_name, ' ', -1) as last_name
-    FROM source
+    SELECT concat('rds-', customer_id) AS customer_id, 
+    SPLIT_PART(contact_name, ' ', 1) AS first_name,
+    SPLIT_PART(contact_name, ' ', -1) AS last_name,
+    company_id
+    FROM CUSTOMERS
+    JOIN companies ON companies.company_name = customers.company_name
 )
 --- final select statement
 select * FROM renamed
