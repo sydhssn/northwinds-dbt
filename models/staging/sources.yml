@@ -1,0 +1,11 @@
+# sources.yml
+version: 2
+
+sources:
+  - name: RDS
+    database: PAGILA_INC
+    schema: NORTHWINDS_RDS_PUBLIC
+    tables:
+      - name: CUSTOMERS 
+      - name: SUPPLIERS
+

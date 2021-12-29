@@ -1,5 +1,5 @@
 WITH source AS (
-    SELECT * FROM "PAGILA_INC"."NORTHWINDS_RDS_PUBLIC"."SUPPLIERS"
+    SELECT * FROM {{ source('RDS', 'SUPPLIERS') }} 
 ), contact_names AS (SELECT SUPPLIER_ID, COUNTRY, 
     SPLIT_PART(contact_name, ' ', 1) as contact_first_name,
     SPLIT_PART(contact_name, ' ', -1) as contact_last_name,
