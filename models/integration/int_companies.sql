@@ -15,5 +15,6 @@ FROM merged_companies GROUP BY NAME
     FROM combined_companies
     LEFT JOIN rds_companies ON combined_companies.NAME = rds_companies.NAME
 )
-SELECT * FROM combined_companies_details
+SELECT {{ dbt_utils.surrogate_key(['name']) }} as COMPANY_PK, HUBSPOT_COMPANY_ID, RDS_COMPANY_ID, NAME, ADDRESS, CITY, POSTAL_CODE, COUNTRY
+FROM combined_companies_details
 
