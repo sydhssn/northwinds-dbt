@@ -1,0 +1,21 @@
+# sources.yml
+version: 2
+
+sources:
+  - name: RDS
+    database: PAGILA_INC
+    schema: NORTHWINDS_RDS_PUBLIC
+    tables:
+      - name: ORDERS
+        columns:
+          - name: order_id
+            tests:
+             - unique
+             - not_null
+      - name: ORDER_DETAILS
+        columns:
+        - name: order_id
+          tests:
+            - not_null
+
+
